@@ -1,4 +1,4 @@
-
+@import url('https://fonts.googleapis.com/css2?family=Nunito&display=swap');
 
 html {
   box-sizing: border-box;
@@ -10,7 +10,7 @@ body {
   overflow-y: hidden;
   display: flex;
   align-items: center;
-
+  font-family: 'Nunito', Helvetica, sans-serif;
 }
 
 /* Video Background */
@@ -50,7 +50,7 @@ video {
   z-index: 2;
   display: flex;
   justify-content: center;
-
+  background: rgba(255, 255, 255, 0.5);
 }
 
 .input-container {
@@ -59,10 +59,12 @@ video {
 }
 
 h1 {
-  font-size: 35px;
+  font-size: 32px;
   text-align: center;
   margin-top: 0;
   margin-bottom: 10px;
+  letter-spacing: 1.4px;
+  padding-bottom: 12px;
 }
 
 /* Form */
@@ -83,7 +85,7 @@ input {
   border-radius: 20px;
   background: #fff;
   outline: none;
-
+  font-family: 'Nunito', sans-serif;
 }
 
 /* Button */
@@ -100,7 +102,9 @@ button {
   outline: none;
 }
 
-
+button:hover {
+  filter: brightness(110%);
+}
 
 /* Countdown */
 ul {
@@ -108,7 +112,7 @@ ul {
 }
 
 li {
-
+  display: inline-block;
   font-size: 30px;
   list-style-type: none;
   padding: 10px;
@@ -127,6 +131,43 @@ li span {
   top: 60px;
 }
 
+.complete-title {
+  animation: complete 4s infinite;
+}
+
+@keyframes complete {
+  0% {
+    color: rgb(233, 13, 13);
+  }
+
+  25% {
+    color: rgb(233, 211, 13);
+  }
+
+  50% {
+    color: rgb(64, 233, 13);
+    transform: scale(1.5);
+  }
+
+  75% {
+    color: rgb(0, 38, 253);
+  }
+
+  100% {
+    color: rgb(194, 0, 253);
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .container {
+    min-width: unset;
+    width: 95vw;
+    min-height: 245px;
+    padding: 20px;
+    margin: 10px;
+  }
+
+}
 
 /* Media Query: Large Smartphone (Vertical) */
 @media screen and (max-width: 1200px) {
@@ -139,12 +180,6 @@ li span {
     object-fit: cover;
     object-position: 70%;
     margin-top: -1px;
-  }
-
-  .container {
-    min-height: 245px;
-    padding: 20px;
-    margin: 10px;
   }
 
   .input-container {
@@ -165,7 +200,7 @@ li span {
   }
 
   h1 {
-    font-size: 20px;
+    font-size: 24px;
   }
 
   li {

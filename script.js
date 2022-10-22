@@ -50,31 +50,20 @@ function updateCountdown(e) {
 
 function updateDOM() {
   countdownActive = setInterval(() => {
-    const now = new Date().getTime();
-    const distance = countdownValue - now;
-    // const days = Math.floor(distance / day);
-    // const hours = Math.floor((distance % day) / hour);
-    // const minutes = Math.floor((distance % hour) / minute);
-    // const seconds = Math.floor((distance % minute) / second);
+  
+    const distance = dateFns.differenceInMilliseconds(
+      new Date(countdownDate),
+      Date.now()
+    );
     
-    // calcula n.o de dias
-    let delta = Math.abs(distance / 1000);
-    const days = Math.floor(delta / 86400);
-    delta -= days * 86400;
+    // const now = new Date().getTime();
+    // const distance = countdownValue - now;
 
-    // calcula n.o de horas
-    const hours = Math.floor(delta / 3600) % 24;
-    delta -= hours * 3600;
-
-    // calcula n.o de minutos
-    const minutes = Math.floor(delta / 60) % 60;
-    delta -= minutes * 60;
-
-    // o que sobra são os segundos
-    const seconds = Math.round(delta % 60);
-
-    console.log('d:', days, 'h:', hours, 'm:', minutes, 's:', seconds)
-
+    const days = Math.floor(distance / day);
+    const hours = Math.floor((distance % day) / hour);
+    const minutes = Math.floor((distance % hour) / minute);
+    const seconds = Math.floor((distance % minute) / second);
+    
     inputContainer.hidden = true;
 
     if (distance < 0) {
@@ -82,6 +71,7 @@ function updateDOM() {
       clearInterval(countdownActive);
       completeElInfo.textContent = `${countdownTitle} terminou às ${countdownDate}`;
       completeEl.hidden = false;
+      
     } else {    
       countdownTitleEl.textContent = `${countdownTitle}`;
       timeElements[0].textContent = `${days}`;

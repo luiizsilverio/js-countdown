@@ -13,7 +13,7 @@ const completeBtn = document.getElementById('complete-button');
 
 let countdownTitle = '';
 let countdownDate = '';
-let countdownValue;
+let countdownValue = new Date();
 let countdownActive;
 let savedCountdown;
 
@@ -32,6 +32,13 @@ function updateCountdown(e) {
   // countdownDate = e.srcElement[1].value;
   countdownTitle = countdownForm.titulo.value;
   countdownDate = countdownForm.datepicker.value;
+
+  savedCountdown = {
+    title: countdownTitle,
+    date: countdownDate
+  }
+
+  localStorage.setItem('countdown', JSON.stringify(savedCountdown));
 
   if (countdownDate === '') {
     alert('Informe uma data');
@@ -90,14 +97,28 @@ function updateDOM() {
 function reset() {
   countdownEl.hidden = true;
   completeEl.hidden = true;
-  inputContainer.hidden = false;
-  
+  inputContainer.hidden = false;  
   clearInterval(countdownActive);
   countdownTitle = '';
   countdownDate = '';
+  localStorage.removeItem('countdown');
+}
+
+function restoreCountdown() {
+  if (localStorage.getItem('countdown')) {
+    inputContainer.hidden = true;
+    savedCountdown = JSON.parse(localStorage.getItem('countdown'));
+    countdownTitle = savedCountdown.title;
+    countdownDate = savedCountdown.date;
+    countdownValue = new Date(countdownDate).getTime();
+    updateDOM();
+  }
 }
 
 // Event Listeners
 countdownForm.addEventListener('submit', updateCountdown);
 countdownBtn.addEventListener('click', reset);
 completeBtn.addEventListener('click', reset);
+
+// On load, check localStorage
+restoreCountdown();
